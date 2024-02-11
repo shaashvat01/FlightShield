@@ -1,68 +1,52 @@
+import pandas as pd
+from PIL import Image
+import numpy as np
+from sklearn.model_selection import train_test_split
 import os
-import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
-# Define paths to your training and validation data
-base_dir = 'path/to/your/dataset'
-train_dir = os.path.join(base_dir, 'train')
-validation_dir = os.path.join(base_dir, 'validation')
+# Configuration
+dataset_dir = '/Users/shaashvatmittal/Downloads/Drone_Stanford_Smaller_Datset'
+# Ensure this path points directly to your CSV file, including the filename
+annotation_file = '/Users/shaashvatmittal/Downloads/Drone_Stanford_Smaller_Datset/annotations.csv'
+output_size = (224, 224)
 
-# Define image dimensions and batch size
-img_width, img_height = 64, 64  # Adjust based on your dataset
-batch_size = 32
+# Load annotations
+annotations = pd.read_csv(annotation_file)
 
-# Data preprocessing and augmentation for training
-train_datagen = ImageDataGenerator(
-    rescale=1./255,
-    shear_range=0.2,
-    zoom_range=0.2,
-    horizontal_flip=True)
+# Placeholder lists for images and labels
+images = []
+labels = []
 
-# Only rescaling for validation data
-validation_datagen = ImageDataGenerator(rescale=1./255)
+# Process each image
+for _, row in annotations.iterrows():
+    image_path = os.path.join(dataset_dir, row['image_filename'])
+    label = row['label']  # Adjust this if your CSV column name is different
 
-train_generator = train_datagen.flow_from_directory(
-    train_dir,
-    target_size=(img_width, img_height),
-    batch_size=batch_size,
-    class_mode='categorical')
+    try:
+        # Open and resize the image
+        with Image.open(image_path) as img:
+            img_resized = img.resize(output_size)
+            images.append(np.array(img_resized) / 255.0)  # Normalize pixel values
+            labels.append(label)
+    except Exception as e:
+        print(f"Error processing image {image_path}: {e}")
 
-validation_generator = validation_datagen.flow_from_directory(
-    validation_dir,
-    target_size=(img_width, img_height),
-    batch_size=batch_size,
-    class_mode='categorical')
+# Convert lists to NumPy arrays
+images = np.array(images)
+labels = np.array(labels)
 
-# CNN Model Definition
-model = Sequential([
-    Conv2D(32, (3, 3), activation='relu', input_shape=(img_width, img_height, 3)),
-    MaxPooling2D(2, 2),
-    Conv2D(64, (3, 3), activation='relu'),
-    MaxPooling2D(2, 2),
-    Conv2D(128, (3, 3), activation='relu'),
-    MaxPooling2D(2, 2),
-    Flatten(),
-    Dense(512, activation='relu'),
-    Dropout(0.5),
-    Dense(3, activation='softmax')  # Adjust based on the number of classes
-])
+# Split the dataset
+train_images, test_images, train_labels, test_labels = train_test_split(images, labels, test_size=0.2, random_state=42)
+val_images, test_images, val_labels, test_labels = train_test_split(test_images, test_labels, test_size=0.5, random_state=42)
 
-# Compile the model
-model.compile(loss='categorical_crossentropy',
-              optimizer='adam',
-              metrics=['accuracy'])
+# Optionally, save your datasets to disk for later use
+# np.save('train_images.npy', train_images)
+# np.save('train_labels.npy', train_labels)
+# np.save('val_images.npy', val_images)
+# np.save('val_labels.npy', val_labels)
+# np.save('test_images.npy', test_images)
+# np.save('test_labels.npy', test_labels)
 
-# Train the model
-history = model.fit(
-    train_generator,
-    steps_per_epoch=train_generator.samples // batch_size,
-    epochs=50,  # Adjust based on your needs
-    validation_data=validation_generator,
-    validation_steps=validation_generator.samples // batch_size)
-
-# Save the model
-model.save('drone_crash_analysis_model.h5')
-
-print("Model trained and saved successfully!")
+print(f'Training set size: {len(train_images)}')
+print(f'Validation set size: {len(val_images)}')
+print(f'Test set size: {len(test_images)}')
