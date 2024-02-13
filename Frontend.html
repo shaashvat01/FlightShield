@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone Insurance</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#discounts">Discounts</a></li>
+                <li><a href="#difference">Why Us</a></li>
+                <li><a href="#quote">Get a Quote</a></li>
+                <li><a href="#uploadLogs">Upload Flight Logs</a></li>
+            </ul>
+        </nav>
+        <h1>Fly Safe, Save Big!</h1>
+        <p>Exclusive discounts for responsible drone enthusiasts.</p>
+    </header>
+
+    <main>
+        <section id="discounts">
+            <h2>Partnered with Leading Drone Brands</h2>
+            <div class="partners-list">
+                <article>
+                    <!-- Ensure the filename matches the actual file in the images folder -->
+                    <img src="Users/shaashvatmittal/Desktop/dji_logo.jpg">
+                    <h3>DJI</h3>
+                    <p>Innovators in drone technology and aerial photography.</p>
+                    <button class="upload-button" data-company="DJI">Upload Flight Logs</button>
+                </article>
+                <article>
+                    <!-- Ensure the filename matches the actual file in the images folder -->
+                    <img src="images/parrot-logo.jpg" alt="Parrot Drones Logo" class="logo">
+                    <h3>Parrot Drones</h3>
+                    <p>European leaders in drone and flying solutions.</p>
+                    <button class="upload-button" data-company="Parrot">Upload Flight Logs</button>
+                </article>
+                <!-- Repeat for other partners as needed -->
+            </div>
+        </section>
+
+        <section id="difference">
+            <h2>What Sets Us Apart</h2>
+            <ul>
+                <li><strong>Customized Coverage:</strong> Tailored insurance based on your flying habits.</li>
+                <li><strong>Safety Rewards:</strong> Discounts for maintaining a high safety score.</li>
+                <li><strong>Real-Time Support:</strong> 24/7 assistance for all your needs.</li>
+                <li><strong>Flexible Plans:</strong> Choose what fits you best, annual or hourly.</li>
+            </ul>
+        </section>
+
+        <section id="quote">
+            <h2>Get Your Personalized Quote</h2>
+            <form>
+                <label for="droneModel">Drone Model:</label>
+                <input type="text" id="droneModel" name="droneModel" required>
+                
+                <label for="flyingFrequency">Flying Frequency:</label>
+                <select id="flyingFrequency" name="flyingFrequency">
+                    <option value="annual">Annual</option>
+                    <option value="hourly">Hourly</option>
+                </select>
+                
+                <button type="submit">Calculate Quote</button>
+            </form>
+        </section>
+
+        <section id="uploadLogs">
+            <h2>Upload Your Flight Logs</h2>
+            <p>Qualify for up to 50% discounts by uploading your flight logs.</p>
+            <form id="logUploadForm">
+                <label for="companySelect">Select Your Drone's Brand:</label>
+                <select id="companySelect" name="company">
+                    <option value="DJI">DJI</option>
+                    <option value="Parrot">Parrot Drones</option>
+                    <!-- Additional options for other partners -->
+                </select>
+
+                <label for="flightLog">Flight Log File:</label>
+                <input type="file" id="flightLog" name="flightLog" accept=".log">
+                
+                <button type="submit">Upload Logs</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Drone Insurance Company</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
