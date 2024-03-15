@@ -1,21 +1,32 @@
-/* Basic Reset */
+/* Enhanced Basic Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+:root {
+    --primary-color: #7baac1; /* Softer primary color */
+    --hover-primary-color: #699aac; /* Softer hover color */
+    --secondary-color: #28a745; /* Keep the secondary color for contrast */
+    --hover-secondary-color: #218838; /* Slightly deeper secondary color for hover state */
+    --background-color: #f4f7fa; /* Soft background for body */
+    --text-color: #333; /* Default text color */
+    --font-family-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-family-heading: 'Arial', sans-serif;
+    --section-background: rgba(255, 255, 255, 0.8); /* Semi-transparent background for sections */
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #eef1f5;
-    color: #333;
+    background: linear-gradient(to right, #00457C, #00B4DB); /* Gradient background for body */
+    font-family: var(--font-family-base);
     line-height: 1.6;
     padding: 20px;
 }
 
-/* Navigation Bar */
+/* Enhanced Navigation Bar */
 nav {
-    background: #007bff;
+    background: var(--primary-color);
     color: #ffffff;
     padding: 10px 20px;
     text-align: center;
@@ -35,38 +46,68 @@ nav ul li a {
     color: #ffffff;
     text-decoration: none;
     font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
-/* Header */
+nav ul li a:hover, nav ul li a:focus {
+    background-color: var(--hover-primary-color);
+}
+
+/* Enhanced Header */
+/* Enhanced Header */
 header {
-    background: #0056b3;
+    background: var(--primary-color); /* Solid color for header to stand out */
     color: #ffffff;
     padding: 40px 20px;
     text-align: center;
     border-radius: 8px;
     margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* More pronounced shadow for a "lifted" effect */
+    position: relative; /* For precise positioning of elements */
 }
 
-/* Main Content */
+.header-content {
+    position: absolute; /* Position the content over the background */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for exact centering */
+    text-align: center;
+}
+
+header h1 {
+    font-family: var(--font-family-heading);
+    margin-bottom: 0.5em; /* Spacing adjustment if needed */
+    font-size: 2.5em; /* Bigger font size for company name */
+}
+
+header h2 {
+    font-size: 2em; /* Adjust size as necessary */
+}
+
+/* You might want to adjust the top margin of the main element if the header has a shadow */
 main {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 40px auto 0; /* Increase the top margin to accommodate header's shadow */
+    padding: 0 20px; /* Added padding for consistency */
 }
 
+
 section {
-    background: #ffffff;
+    background: var(--section-background); /* Semi-transparent background for each section */
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Softer shadow */
 }
 
 h2 {
-    color: #007bff;
+    color: var(--primary-color);
     margin-bottom: 20px;
 }
 
-/* Partners List */
+/* Partners List Enhancements */
 .partners-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -74,31 +115,28 @@ h2 {
     justify-items: center;
 }
 
-.partners-list article {
-    text-align: center;
-}
-
 .logo {
     max-width: 100px;
     margin-bottom: 15px;
 }
 
-/* Buttons */
+/* Button Enhancements */
 button, .upload-button {
-    background-color: #28a745;
+    background-color: var(--secondary-color);
     color: #ffffff;
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover, .upload-button:hover {
-    background-color: #218838;
+    background-color: var(--hover-secondary-color);
+    transform: scale(1.05);
 }
 
-/* Quote Form */
+/* Form Enhancements */
 form {
     margin-top: 20px;
 }
@@ -116,18 +154,11 @@ form input, form select {
     border: 1px solid #ccc;
 }
 
-/* Upload Logs Section */
-#uploadLogs {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-}
-
-/* Footer */
+/* Footer Enhancements */
 footer {
     text-align: center;
     padding: 20px;
-    background: #007bff;
+    background: var(--primary-color);
     color: #ffffff;
     margin-top: 20px;
     border-radius: 8px;
