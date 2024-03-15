@@ -1,9 +1,7 @@
-Code:
-SAS Regression Model for Avg. Monthly Payment Through Existing Platforms:
-/* Generated Code (IMPORT) /
-/ Source File: UDrone_Insurance_Data.xlsx /
-/ Source Path: /home/u63739262/sasuser.v94/Updated /
-/ Code generated on: 2/11/24, 8:08 AM /
+/* Generated Code (IMPORT) */
+/* Source File: UDrone_Insurance_Data.xlsx */
+/* Source Path: /home/u63739262/sasuser.v94/Updated */
+/* Code generated on: 2/11/24, 8:08 AM */
 
 %web_drop_table(WORK.IMPORT);
 
@@ -11,9 +9,9 @@ SAS Regression Model for Avg. Monthly Payment Through Existing Platforms:
 FILENAME REFFILE '/home/u63739262/sasuser.v94/Updated/UDrone_Insurance_Data.xlsx';
 
 PROC IMPORT DATAFILE=REFFILE
-    DBMS=XLSX
-    OUT=WORK.INS;
-    GETNAMES=YES;
+	DBMS=XLSX
+	OUT=WORK.INS;
+	GETNAMES=YES;
 RUN;
 
 PROC CONTENTS DATA=WORK.INS; RUN;
@@ -22,10 +20,10 @@ PROC CONTENTS DATA=WORK.INS; RUN;
 
 data INS2;
    set INS;
-   Year_Rescaled = Year - 2017; / Replace 2000 with the first year in your dataset if different */
+   Year_Rescaled = Year - 2017; /* Replace 2000 with the first year in your dataset if different */
 run;
 
 proc reg data=INS2;
    model AverageMonthlyPayment = Year_Rescaled AverageInsuredDroneValue PercentagePilotsInsuringDrone PercentageClientsInsuringEquipme;
 run;
-------------
+
